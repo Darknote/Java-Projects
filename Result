@@ -1,0 +1,82 @@
+package cpackage_1;
+import java.util.Random;
+
+public class Result
+{
+	
+	public Result(){}
+
+	public void result(int wins, int losses)
+	{
+		Random rand = new Random();
+		int min = 1;
+		int max = 6;
+		int pointz = 0;
+		int dice1 = 0; 
+		int dice2  = 0;
+		int total = 0;
+		int gamecount=1; 
+		do{ 
+			dice1 = rand.nextInt(max-min+1)+min;
+			dice2  = rand.nextInt(max-min+1)+min;
+			total = dice1 + dice2;
+			System.out.println("Result is " + total);
+			
+					if(total==7 || total==11)
+					{
+						System.out.println("You win without a second roll.");
+						wins+=1;
+					}
+					else if(total==2 || total == 3 || total==12)
+					{
+						System.out.println("You lose without a second roll.");
+						losses+=1;
+					}
+					else
+					{
+						dice1 = rand.nextInt(max-min+1)+min;
+						dice2 = rand.nextInt(max-min+1)+min;
+						pointz = dice1 + dice2;
+						while(total != 7 || total != pointz)
+						{
+							dice1 = rand.nextInt(max-min+1)+min;
+							dice2 = rand.nextInt(max-min+1)+min;
+							total = dice1 + dice2;
+							if(total == 7 || total == pointz)
+							{
+								System.out.println("Its 7 or Similar to Pointz.");
+								break;
+							}
+						}
+						if(total==pointz)  
+						{
+							System.out.println("You win! The Second Roll Was "+ pointz); 
+							wins+=1;
+						}
+						else if(total == 7) 
+						{
+							System.out.println("You lose! The Second Roll Was "+ 7); 
+							losses+=1;	
+						}
+						else
+							System.out.println("Error 404 Dices not found."); 
+					    }											
+					
+					gamecount++;
+		}while (gamecount < 100);
+					
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		Result re = new Result();
+		int wins = 0;
+		int losses = 0;
+		re.result(wins, losses);
+		System.out.println("Total Wins: " + wins);
+		//Using this we can store the wins and then calculate probability.
+	}
+
+}
+
